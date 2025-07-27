@@ -1,0 +1,85 @@
+{
+  "target_profile_url": {
+    "description": "要监控其好友列表的公开Steam个人资料URL (必填)",
+    "type": "string",
+    "default": "https://steamcommunity.com/id/wzken/",
+    "hint": "该用户的个人资料和好友列表必须设置为“公开”。插件将监控此用户的所有好友。"
+  },
+  "steam_login_secure_cookie": {
+    "description": "您的'steamLoginSecure' Cookie (可选，用于增强稳定性)",
+    "type": "string",
+    "hint": "建议填写，以模拟登录用户身份访问，避免因频繁抓取被Steam限制。",
+    "obvious_hint": false
+  },
+  "session_id_cookie": {
+    "description": "您的'sessionid' Cookie (可选，用于增强稳定性)",
+    "type": "string",
+    "hint": "同上，与steamLoginSecure配套使用。",
+    "obvious_hint": false
+  },
+  "proxy_url": {
+    "description": "用于访问Steam网页的HTTP/HTTPS代理URL (可选)",
+    "type": "string",
+    "default": "",
+    "hint": "例如: http://user:pass@host:port 或 socks5://host:port。如果留空，则不使用代理。"
+  },
+
+  "friend_list_check_interval_seconds": {
+    "description": "【好友列表监控】的刷新间隔 (秒)",
+    "type": "int",
+    "default": 120,
+    "hint": "用于批量获取好友列表状态的固定间隔。例如: 120 表示每2分钟获取一次好友列表快照。"
+  },
+  "individual_ingame_interval_seconds": {
+    "description": "【单独监控】用户在游戏中的检查间隔 (秒)",
+    "type": "int",
+    "default": 60,
+    "hint": "当单独监控的用户在玩游戏时，使用此较短间隔。"
+  },
+  "individual_online_interval_seconds": {
+    "description": "【单独监控】用户在线但未游戏的检查间隔 (秒)",
+    "type": "int",
+    "default": 300,
+    "hint": "当单独监控的用户在线时，使用此中等间隔。"
+  },
+  "individual_offline_interval_seconds": {
+    "description": "【单独监控】用户离线时的检查间隔 (秒)",
+    "type": "int",
+    "default": 900,
+    "hint": "当单独监控的用户离线时，使用此较长间隔以节省资源。"
+  },
+  "id_re_resolve_interval_hours": {
+    "description": "Steam ID/URL 周期性重解析的间隔时间 (小时)",
+    "type": "int",
+    "default": 24,
+    "hint": "例如: 24 表示每24小时重解析一次用户的Steam URL，以应对自定义URL变化。设为0禁用。"
+  },
+
+  "enable_llm_summaries": {
+    "description": "是否启用LLM生成游戏状态的简短语句",
+    "type": "bool",
+    "default": true,
+    "hint": "启用后，通知消息将由LLM生成更生动有趣的语句。需要AstrBot已配置并启用了大语言模型。"
+  },
+  "use_meme_notification": {
+    "description": "是否使用Meme API生成图片通知",
+    "type": "bool",
+    "default": false,
+    "hint": "启用后，将调用Meme API生成一张包含头像和游戏信息的图片作为通知，而不是简单的图文消息。"
+  },
+  "meme_api_base_url": {
+    "description": "Meme API的基础URL地址",
+    "type": "string",
+    "default": "http://127.0.0.1:2233",
+    "hint": "用于生成图片通知的API服务地址。"
+  },
+  "admin_notification_uids": {
+    "description": "接收关键错误通知 (如Cookie失效) 的管理员会话ID列表",
+    "type": "list",
+    "items": {
+      "type": "string",
+      "hint": "用于接收插件内部的非游戏状态变化通知，例如Cookie过期警告。"
+    },
+    "default": []
+  }
+}
