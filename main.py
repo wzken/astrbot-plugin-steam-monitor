@@ -411,22 +411,21 @@ class SteamMonitorPublicPluginV2(Star):
 
         total_today_str = self._format_duration(rule.get('total_playtime_today', 0))
         
-        prompt = f"""你是一个风趣幽默的AI助手，负责评论朋友的游戏动态。请根据以下信息，为你的朋友 {player_name} 生成一句简短、适合在聊天软件中发送的评论。请自由发挥，可以吐槽、可以鼓励、可以提醒，也可以结合时事或游戏本身玩梗。只返回评论本身，不要超过40个字。
-
-**最新事件:**
-- **类型:** {latest_event_desc}
-- **游戏名称:** 《{game_name}》
-- **当前时间:** {time.strftime('%Y-%m-%d %H:%M:%S')}
-
-**最近活动历史 (从新到旧):**
-```
-{history_str.strip()}
-```
-
-**今日统计:**
-- **累计游戏时长:** {total_today_str}
-"""
-        return prompt
+        # 使用字符串拼接代替f-string以避免潜在的反斜杠问题
+        prompt_parts = [
+            f"你是一个风趣幽默的AI助手，负责评论朋友的游戏动态。请根据以下信息，为你的朋友 {player_name} 生成一句简短、适合在聊天软件中发送的评论。请自由发挥，可以吐槽、可以鼓励、可以提醒，也可以结合时事或游戏本身玩梗。只返回评论本身，不要超过40个字。\n\n",
+            "**最新事件:**\n",
+            f"- **类型:** {latest_event_desc}\n",
+            f"- **游戏名称:** 《{game_name}》\n",
+            f"- **当前时间:** {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n",
+            "**最近活动历史 (从新到旧):**\n",
+            "```\n",
+            history_str.strip(),
+            "\n```\n\n",
+            "**今日统计:**\n",
+            f"- **累计游戏时长:** {total_today_str}\n"
+        ]
+        return "".join(prompt_parts)
 
     async def _notify_admins(self, message: str):
         """向配置文件中指定的所有管理员发送通知。"""
