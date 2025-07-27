@@ -23,7 +23,6 @@
     "default": "",
     "hint": "例如: http://user:pass@host:port 或 socks5://host:port。如果留空，则不使用代理。"
   },
-
   "friend_list_check_interval_seconds": {
     "description": "【好友列表监控】的刷新间隔 (秒)",
     "type": "int",
@@ -54,7 +53,6 @@
     "default": 24,
     "hint": "例如: 24 表示每24小时重解析一次用户的Steam URL，以应对自定义URL变化。设为0禁用。"
   },
-
   "enable_llm_summaries": {
     "description": "是否启用LLM生成游戏状态的简短语句",
     "type": "bool",
